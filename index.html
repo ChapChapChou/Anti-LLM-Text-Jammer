@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本编辑器 | Text Editor</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="light min-h-screen flex flex-col">
+    <div class="fade-in container mx-auto px-4 py-8 max-w-5xl flex-grow">
+        <header class="mb-8">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold tracking-tight" id="title">反LLM文本注入器</h1>
+                <div class="flex space-x-3">
+                    <button id="langToggle" class="btn-secondary px-3 py-2 rounded-md flex items-center">
+                        <i class="fas fa-language mr-2"></i>
+                        <span id="langText">English</span>
+                    </button>
+                    <button id="themeToggle" class="btn-secondary px-3 py-2 rounded-md">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+            <p class="text-lg mt-2 opacity-80" id="subtitle">一个优雅的文本编辑工具，支持特殊文本注入</p>
+        </header>
+
+        <main>
+            <section class="mb-8">
+                <div class="card rounded-lg p-5 mb-6">
+                    <h2 class="text-xl font-semibold mb-4" id="inputTitle">输入您的文本</h2>
+                    <textarea id="textInput" class="w-full p-4 rounded-md h-48 resize-y" placeholder="在此处输入您的文本..."></textarea>
+                </div>
+
+                <div class="card rounded-lg p-5 mb-6">
+                    <h2 class="text-xl font-semibold mb-4" id="injectionTitle">文本注入设置</h2>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1">
+                            <label for="textLength" class="block mb-2" id="lengthLabel">注入文本长度</label>
+                            <input type="number" id="textLength" min="100" max="5000" value="1000" class="w-full p-3 rounded-md">
+                            <p class="mt-2 text-sm opacity-70" id="lengthHint">设置要注入的文本长度（100-5000字）</p>
+                        </div>
+                        <div class="flex-1">
+                            <label class="block mb-2" id="instructionLabel">使用说明</label>
+                            <div class="bg-opacity-50 p-3 rounded-md text-sm" id="instruction" style="background-color: var(--color-input-bg);">
+                                在上方文本框中输入内容，然后用鼠标选择一部分文本。点击"注入文本"按钮将在选中文本的第一个字符后隐式插入特定内容。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center">
+                        <button id="injectButton" class="btn-primary px-4 py-2 rounded-md flex items-center">
+                            <i class="fas fa-syringe mr-2"></i>
+                            <span id="injectButtonText">注入文本</span>
+                        </button>
+                        <div id="loadingIndicator" class="ml-4 hidden">
+                            <div class="loading mr-2"></div>
+                            <span id="loadingText">正在处理文本...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card rounded-lg p-5">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold" id="resultTitle">结果文本</h2>
+                        <button id="copyButton" class="btn-secondary px-3 py-2 rounded-md flex items-center">
+                            <i class="fas fa-copy mr-2"></i>
+                            <span id="copyButtonText">复制文本</span>
+                        </button>
+                    </div>
+                    <div id="resultText" class="w-full p-4 rounded-md min-h-48 whitespace-pre-wrap break-words" style="background-color: var(--color-input-bg);">
+                        <p id="resultHint" class="opacity-70">文本处理结果将显示在这里...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="mt-auto py-6 border-t" style="border-color: var(--color-border);">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="font-medium" id="authorLabel">作者: Hang Zhou<span id="authorName">文本工具开发者</span></p>
+                    <p class="text-sm opacity-70" id="copyright">© 2025 版权所有。保留所有权利。</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/ChapChapChou" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://x.com/harlanzhooou" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/halranzhou/" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 用于复制的隐藏元素 -->
+    <textarea id="hiddenCopyArea" style="position: absolute; left: -9999px;"></textarea>
+
+    <!-- JavaScript imports -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html> 
