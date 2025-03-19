@@ -24,7 +24,7 @@ Thanks to [Karpathy](https://x.com/karpathy/status/1823418177197646104) for prov
 
 ### Installation
 
-You can use my [website](https://v1cpje3acp.yourware.so/) 
+You can use my [website](https://9kgr1djslj.yourware.so/) 
 
 or
 
